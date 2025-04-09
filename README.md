@@ -10,16 +10,10 @@
 
 ## Architecture
 ```mermaid
-flowchart LR
-    A["Kafka Producer"] L_A_B_0@--> B["Kafka Topic"]
-    B L_B_C_0@--> C["KSQL Stream Processing"]
-    C L_C_D_0@--> D["dbt Models"]
-    D L_D_E_0@--> E["DuckDB Analytics"]
-
-
-    L_A_B_0@{ animation: slow } 
-    L_B_C_0@{ animation: slow } 
-    L_C_D_0@{ animation: slow } 
-    L_D_E_0@{ animation: slow } 
+graph LR
+  A[Kafka Producer] --> B[Kafka Topic]
+  B --> C[KSQL Stream Processing]
+  C --> D[dbt Models]
+  D --> E[DuckDB Analytics]
 
 
