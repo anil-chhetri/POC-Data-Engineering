@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-ls ./../
+ls ./ && cat ./requirements.txt
