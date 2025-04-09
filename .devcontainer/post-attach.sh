@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-ls ./ && cat ./requirements.txt
+echo "starting docker compose up"
+bash -x ./start.sh
