@@ -1,5 +1,32 @@
 {
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {},
-  "postAttachCommand": "bash .devcontainer/post-attach.sh"
+  "postAttachCommand": "bash .devcontainer/post-attach.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "keybindings": [
+          {
+            "key": "ctrl+alt+t",
+            "command": "workbench.action.createTerminalEditor"
+          },
+          {
+            "key": "ctrl+alt+s",
+            "command": "workbench.action.splitEditorToRightGroup"
+          },
+          {
+            "key": "ctrl+alt+l",
+            "command": "workbench.action.focusLeftGroup"
+          },
+          {
+            "key": "ctrl+alt+r",
+            "command": "workbench.action.focusRightGroup"
+          }
+        ]
+      }
+    }
+  }
 }
