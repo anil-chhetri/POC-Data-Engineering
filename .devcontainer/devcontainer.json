@@ -1,5 +1,5 @@
 {
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {},
-  "postAttachCommand": ".devcontainer/post-attach.sh"
+  "postAttachCommand": "bash .devcontainer/post-attach.sh"
 }
