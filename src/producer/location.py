@@ -39,16 +39,18 @@ class Location:
             faker: Faker instance for generating random data.
         
         """
-        country = random.choice(cls.Country.keys())
+        country = random.choice(list(Location.Country.keys()))
         fake = Faker(cls.Country[country])
 
         # Generate random city, region, and timezone
-        city, region, timezone = fake.local_latlng()
+        city, region, timezone = fake.local_latlng(fake.current_country_code())[2:]
+        
         while True:
             location = cls(
-                country=fake.country(),
-                city=fake.city(),
-                region=fake.state(),
-                timezone=fake.timezone()
+                country=fake.current_country(),
+                city=city,
+                region=region,
+                timezone=timezone
             )
+
             yield location
