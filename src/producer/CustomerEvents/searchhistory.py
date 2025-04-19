@@ -14,7 +14,7 @@ class SearchHistory:
         for i in range(random.randint(1, 5)):
             search_history.append({
                 "search_id": "s" + str(random.randint(100000, 999999)),
-                "timestamp": str(random.randint(1, 1000)) + "-" + str(random.randint(1, 12)) + "-" + str(random.randint(1, 31)) + "T" + str(random.randint(0, 23)) + ":" + str(random.randint(0, 59)) + ":" + str(random.randint(0, 59)),
+                "timestamp": str(random.randint(2000, 2025)) + "-" + str(random.randint(1, 12)) + "-" + str(random.randint(1, 28)) + "T" + str(random.randint(0, 23)) + ":" + str(random.randint(0, 59)) + ":" + str(random.randint(0, 59)),
                 "query": random.choice(['quantum', 'nebula', 'photon', 'galaxy', 'cosmos']),
                 "results_count": random.randint(10, 100),
             })

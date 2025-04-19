@@ -1,5 +1,9 @@
-from confluent_kafka import Producer
+from confluent_kafka.serializing_producer import SerializingProducer
+from confluent_kafka.serialization import StringSerializer
+
 from custom_logging import CustomLogger
+from kafka_schema_registry import KafkaSchemaRegistry
+
 
 
 class KafkaProducer:
@@ -7,7 +11,7 @@ class KafkaProducer:
         self.logger = CustomLogger(__name__)
         self.config = self.provide_additional_config(config or {})
         self.topic = topic or "customer_events" 
-        self.producer = Producer(self.config)
+        self.producer = self.get_producer(config=self.config)
 
     def provide_additional_config(self, config):
         additional_config = {
@@ -22,6 +26,26 @@ class KafkaProducer:
 
         return additional_config | config
     
+    def get_producer(self, config):
+        try: 
+            self.logger.debug(f"Creating producer with config: {config}")
+            self.kafka_schema_registry = KafkaSchemaRegistry()
+
+            serializing_producer_new_config = {
+                'key.serializer': StringSerializer('utf_8'),
+                'value.serializer': self.kafka_schema_registry.register_schema(),
+            } | config
+
+            producer = SerializingProducer(
+                conf=serializing_producer_new_config
+            )
+            
+            return producer
+        except Exception as e:
+            self.logger.error(f"Failed to create producer: {e}")
+            raise Exception("Failed to create producer")
+            
+    
     def delivery_report(self, err, msg):
         if err is not None:
             self.logger.error(f"Message delivery failed: {err}")
@@ -33,8 +57,8 @@ class KafkaProducer:
         try:
             self.logger.info(f"Producing events to topic {self.topic}")
             self.producer.produce(self.topic
-                    , key=str(id).encode('utf-8')
-                    , value=events.encode('utf-8')
+                    , key=str(id)
+                    , value=events
                     , on_delivery=self.delivery_report
             )
 
@@ -52,4 +76,4 @@ class KafkaProducer:
 
         finally:
             self.producer.flush()
-            self.logger.info(f"Flushed producer for topic {self.topic}")            
+            self.logger.info(f"Flushed producer for topic {self.topic}")

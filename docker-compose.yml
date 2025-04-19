@@ -57,13 +57,32 @@ services:
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
       KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://schema-registry:8081
-    healthcheck:
-      test: ["CMD", "curl", "-f", "localhost:8080/actuator/health"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
     networks:
       - app-network
+
+  schema-registry:
+    image:  confluentinc/cp-schema-registry:7.6.5
+    container_name: schemaRegistry
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka:9092
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+      SCHEMA_REGISTRY_KAFKASTORE_TOPIC: _schemas
+      SCHEMA_REGISTRY_DEBUG: "true"
+    healthcheck:
+      test: ["CMD", "curl", "--silent", "--fail", "-X", "GET", "http://localhost:8081/subjects"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "8081:8081"
+    networks:
+      - app-network
+
+
 
   playground:
     build:
