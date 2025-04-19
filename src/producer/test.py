@@ -4,6 +4,7 @@ from kafka_configuration import KafkaConfiguration
 from kafka_producer import KafkaProducer
 
 
+
 logger = CustomLogger(__name__)
 logger.info("Starting Kafka configuration Test")
 kafka_config = KafkaConfiguration()

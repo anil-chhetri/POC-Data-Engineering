@@ -10,13 +10,11 @@ from .user_action import UserAction
 from .recommendations import Recommendations
 from .searchhistory import SearchHistory
 
-import pprint
-import json
 
 device_type = ['desktop', 'tablet', 'smartTV', 'mobile']
 event_type = ['content_play', 'search', 'browse']
 
-def generate_consumer_event_data():
+def generate_consumer_event_data() -> dict:
     device = Device.generate_device_data(random.choice(device_type)).__next__().as_dict()
     location = Location.generate_location_data().__next__().as_dict()
     content = Content.generate_content_data().__next__().as_dict()
@@ -37,7 +35,7 @@ def generate_consumer_event_data():
         "search_history": SearchHistory.generate_serach_history_data(),
     }
 
-    return(json.dumps(consumer_events, indent=4))
+    return consumer_events
    
 
 if __name__ == "__main__":

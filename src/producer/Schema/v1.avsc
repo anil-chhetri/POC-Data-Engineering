@@ -1,0 +1,140 @@
+{
+  "type": "record",
+  "name": "UserEvent",
+  "fields": [
+    {
+      "name": "device",
+      "type": {
+        "type": "record",
+        "name": "Device",
+        "fields": [
+          {"name": "type", "type": "string"},
+          {"name": "os", "type": "string"},
+          {"name": "os_version", "type": "string"},
+          {"name": "app_version", "type": "string"},
+          {"name": "model", "type": "string"}
+        ]
+      }
+    },
+    {
+      "name": "location",
+      "type": {
+        "type": "record",
+        "name": "Location",
+        "fields": [
+          {"name": "country", "type": "string"},
+          {"name": "city", "type": "string"},
+          {"name": "region", "type": "string"},
+          {"name": "timezone", "type": "string"}
+        ]
+      }
+    },
+    {
+      "name": "content",
+      "type": {
+        "type": "record",
+        "name": "Content",
+        "fields": [
+          {"name": "id", "type": "string"},
+          {"name": "title", "type": "string"},
+          {"name": "type", "type": "string"},
+          {"name": "episode", "type": "int"},
+          {"name": "season", "type": "int"},
+          {"name": "provider", "type": "string"},
+          {"name": "genre", "type": "string"},
+          {"name": "release_year", "type": "int"},
+          {"name": "duration", "type": "int"},
+          {"name": "language", "type": "string"}
+        ]
+      }
+    },
+    {"name": "event_type", "type": "string"},
+    {
+      "name": "user_subscription",
+      "type": {
+        "type": "record",
+        "name": "UserSubscription",
+        "fields": [
+          {"name": "plan", "type": "string"},
+          {"name": "start_date", "type": "string"},
+          {"name": "billing_cycle", "type": "string"},
+          {
+            "name": "connected_services",
+            "type": {"type": "array", "items": "string"}
+          }
+        ]
+      }
+    },
+    {"name": "timestamp", "type": "string"},
+    {
+      "name": "event_details",
+      "type": {
+        "type": "record",
+        "name": "EventDetails",
+        "fields": [
+          {"name": "play_duration", "type": "int"},
+          {"name": "play_percentage", "type": "double"},
+          {"name": "playback_quality", "type": "string"},
+          {"name": "buffering_incidents", "type": "int"},
+          {"name": "playback_speed", "type": "double"},
+          {"name": "paused", "type": "boolean"},
+          {"name": "completed", "type": "boolean"},
+          {"name": "network_type", "type": "string"},
+          {"name": "bandwidth", "type": "string"}
+        ]
+      }
+    },
+    {
+      "name": "user_action",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "UserAction",
+          "fields": [
+            {"name": "action_type", "type": "string"},
+            {"name": "timestamp", "type": "string"},
+            {"name": "duration", "type": ["int", "null"]},
+            {"name": "old_speed", "type": ["double", "null"]},
+            {"name": "new_speed", "type": ["double", "null"]},
+            {"name": "old_quality", "type": ["string", "null"]},
+            {"name": "new_quality", "type": ["string", "null"]},
+            {"name": "completed", "type": ["boolean", "null"]}
+          ]
+        }
+      }
+    },
+    {
+      "name": "recommendations",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "Recommendation",
+          "fields": [
+            {"name": "content_id", "type": "string"},
+            {"name": "position", "type": "int"},
+            {"name": "algorithm", "type": "string"},
+            {"name": "clicked", "type": "boolean"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "search_history",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "SearchHistory",
+          "fields": [
+            {"name": "search_id", "type": "string"},
+            {"name": "timestamp", "type": "string"},
+            {"name": "query", "type": "string"},
+            {"name": "results_count", "type": "int"}
+          ]
+        }
+      }
+    }
+  ]
+}
