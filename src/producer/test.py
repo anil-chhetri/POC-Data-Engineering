@@ -19,12 +19,23 @@ logger.info("Starting Customer Events Test")
 
 logger.info('producing the event to customer events topic')
 producer = KafkaProducer()
-for i in range(1, 2):
-    customer_events = c.generate_consumer_event_data()
-    logger.debug("Creating customer events")
+i = 0
+while True:
+    try: 
+        customer_events = c.generate_consumer_event_data()
+        logger.debug("Creating customer events")
 
-    logger.debug("Produced customer events")
-    producer.produce(i, customer_events)
+        logger.debug("Produced customer events")
+        producer.produce(i, customer_events)
+        i = i+1
+
+    except KeyboardInterrupt:
+        logger.info("Keyboard interrupt received, stopping the producer")
+        break
+    except Exception as e:
+        logger.error(f"Error producing event: {e}")
+        continue
+    
 
 logger.debug(f"{i=} produced to kafka topic")
 
