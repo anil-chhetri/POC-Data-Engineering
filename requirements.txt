@@ -3,3 +3,9 @@ faker==18.10.1
 deepdiff==8.4.2
 fastavro==1.10.0
 requests==2.32.3
+attrs==25.3.0
+Authlib==1.5.2
+cachetools==5.5.2
+httpx==0.28.1
+pyarrow==20.0.0
+pandas==2.2.3
