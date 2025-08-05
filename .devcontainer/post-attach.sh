@@ -1,4 +1,7 @@
-#!/usr/bin/env bash
-echo "starting docker compose up"
-bash -x ./start.sh
-curl -LsSf https://astral.sh/uv/install.sh | sh
+# Run start.sh
+if [ -f "./start.sh" ]; then
+    echo "Running start.sh..."
+    bash ./start.sh
+else
+    echo "Warning: start.sh not found, skipping..."
+fi
