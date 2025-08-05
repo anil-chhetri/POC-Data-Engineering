@@ -55,6 +55,8 @@ class KafkaConsumer:
 
     def start_consuming(self):
         try:
+            intermidate_data = []
+            count = 0
             self.logger.info("Starting Kafka consumer...")
             while True:
                 self.logger.info("Waiting for messages...")
@@ -68,8 +70,18 @@ class KafkaConsumer:
                     continue
                 context = SerializationContext(self.KAFAK_TOPIC, MessageField.VALUE)
                 message_value = [self.get_arvo_deserializer()(x.value(), context) for x in msg]
-                print(message_value)
-                SaveJson.save_as_parquet(message_value)
+                # print(message_value[0])
+                intermidate_data.append(message_value[0])
+
+                print(f'Message consumed. Count reach to -> {count}')
+
+                if count == 1200:
+                    SaveJson.save_as_parquet(intermidate_data)
+                    # reset values 
+                    intermidate_data.clear()
+                    count = 0
+
+                count = count + 1
         except KeyboardInterrupt:
             self.logger.info("Stopping Kafka consumer...")
         except Exception as e:

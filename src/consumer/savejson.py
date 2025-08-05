@@ -3,6 +3,7 @@ import pyarrow.parquet as pq
 
 import json
 import pandas as pd
+import os
 
 import uuid
 
@@ -10,7 +11,6 @@ from pathlib import Path
 
 
 class SaveJson:
-
 
     def save_as_parquet(data, path=None):
         """
@@ -26,8 +26,10 @@ class SaveJson:
             data_folder_path = path.joinpath(f'parquet_data/data/{uuid.uuid4()}.parquet')
         else: 
             data_folder_path = path
+        
+        os.makedirs(os.path.dirname(data_folder_path), exist_ok=True)
 
-            
+        print(f'writing data to following path {data_folder_path} -? ')
         table = pyarrow.Table.from_pandas(data)
         pq.write_table(table, data_folder_path)
 
@@ -38,5 +40,5 @@ if __name__ == "__main__":
 
     print(type(data[0]))
 
-    df = pd.json_normalize(data)
-    SaveJson().save_as_parquet(df)
+    # df = pd.json_normalize(data)
+    SaveJson.save_as_parquet(data)
