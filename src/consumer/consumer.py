@@ -83,6 +83,8 @@ class KafkaConsumer:
 
                 count = count + 1
         except KeyboardInterrupt:
+            SaveJson.save_as_parquet(intermidate_data)
+            self.logger.info("saving intermidate data to parquet file.")
             self.logger.info("Stopping Kafka consumer...")
         except Exception as e:
             self.logger.error(f"Error consuming messages: {e.__str__()}")

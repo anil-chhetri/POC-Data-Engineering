@@ -1,0 +1,21 @@
+src:
+  outputs:
+    dev_duckdb:
+      type: duckdb
+      path: "{{ env_var('DUCK_PATH_DEV') }}"
+      schema: raw
+      extensions:
+        - httpfs
+        - parquet
+      threads: 1
+
+    dev_pg:
+      type: postgres
+      host: localhost
+      user: user
+      pass: test
+      dbname: testDB
+      port: 5432
+      schema: raw
+
+  target: dev_pg

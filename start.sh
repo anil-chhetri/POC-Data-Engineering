@@ -26,7 +26,7 @@ source "$VENV_PATH/bin/activate"
 
 # Install dbt-core and dbt-duckdb
 echo "Installing dbt-core and dbt-duckdb..."
-uv pip install dbt-core dbt-duckdb
+uv pip install dbt-core dbt-duckdb dbt-postgres
 
 # Install DuckDB CLI
 if ! command -v duckdb &> /dev/null; then

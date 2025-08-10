@@ -1,0 +1,23 @@
+# Dockerfile
+FROM postgres:17
+
+# Install curl to fetch DuckDB CLI
+RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && \
+    apt-get install -y wget unzip build-essential cmake libsqlite3-dev && \
+    wget https://github.com/duckdb/duckdb/releases/download/v0.10.1/duckdb_cli-linux-amd64.zip && \
+    unzip duckdb_cli-linux-amd64.zip && \
+    mv duckdb /usr/local/bin/duckdb && \
+    rm duckdb_cli-linux-amd64.zip
+
+
+# Add initialization scripts (executed only on first cluster init)
+COPY init/postgres/ /docker-entrypoint-initdb.d/
+RUN chmod +x /docker-entrypoint-initdb.d/*.sh
+
+COPY parquet_data/data/ /opt/parquet/
+
+
+

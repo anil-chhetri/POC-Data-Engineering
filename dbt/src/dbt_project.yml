@@ -33,6 +33,7 @@ models:
   src:
     # Config indicated by + and applies to all files under models/example/
     example:
+      +schema: test
       +materialized: view
 
 flags:
