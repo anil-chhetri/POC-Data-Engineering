@@ -40,7 +40,7 @@ fi
 
 # Start Docker containers
 echo "Starting Docker containers..."
-docker compose -f docker-compose.yml up -d --build --wait
+# docker compose -f docker-compose.yml up -d --build --wait
 
 # Update bash prompt
 echo "Updating bash prompt..."
@@ -49,12 +49,12 @@ if ! grep -q 'export PS1="\\W> "' ~/.bashrc; then
 fi
 
 # Start SSH service in container
-echo "Starting SSH service in 'playground' container..."
-docker exec playground service ssh start
+# echo "Starting SSH service in 'playground' container..."
+# docker exec playground service ssh start
 
 # Check SSH service status
-echo "Checking SSH service status in 'playground' container..."
-docker exec playground service ssh status
+# echo "Checking SSH service status in 'playground' container..."
+# docker exec playground service ssh status
 
 echo "Setup complete!"
 echo "Activate your environment manually with: source $VENV_PATH/bin/activate"
