@@ -1,9 +1,7 @@
-
 version: 2
 
 models:
   - name: my_first_dbt_model
-    schema: test
     description: "A starter dbt model"
     columns:
       - name: id
@@ -12,8 +10,9 @@ models:
           - unique
           - not_null
 
+    config:
+      schema: test
   - name: my_second_dbt_model
-    schema: test
     description: "A starter dbt model"
     columns:
       - name: id
@@ -21,3 +20,5 @@ models:
         data_tests:
           - unique
           - not_null
+    config:
+      schema: test

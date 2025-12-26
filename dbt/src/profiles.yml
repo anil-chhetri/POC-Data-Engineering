@@ -13,7 +13,7 @@ src:
       type: postgres
       host: localhost
       user: user
-      pass: test
+      password: test
       dbname: testDB
       port: 5432
       schema: raw

@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: staging
+    database: testDB
+    schema: public
+    description: "This table contains all customer details data as json data."
+    tables:
+      - name: customer
+        identifier: all_data
+        description: ""
+        columns:
+          - name: data
+            description: ""
