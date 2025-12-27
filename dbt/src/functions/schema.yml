@@ -1,0 +1,13 @@
+functions:
+  - name: get_filename_from_path
+    description: "Extracts the filename from a given file path."
+    config:
+      schema: udf
+      enabled: true
+      volatility: deterministic
+    arguments:
+      - name: path
+        description: "The full file path as a string."
+        data_type: text
+    returns:
+      data_type: text

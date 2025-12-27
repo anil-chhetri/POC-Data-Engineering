@@ -8,6 +8,8 @@
 WITH cte AS (
 
     SELECT
+        data->>'user_id' as user_id,
+        {{ function('get_filename_from_path') }} (data->>'filename') as source_file_name,
         /* ---------------------- CONTENT ---------------------- */
         data->>'content.id'              AS content_id,
         data->>'content.type'            AS content_type,

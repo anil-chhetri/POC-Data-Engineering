@@ -16,6 +16,7 @@ test-paths: ["tests"]
 seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
+function-paths: ["functions"]
 
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
@@ -31,6 +32,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   +schema: test
   # Config indicated by + and applies to all files under models/example/
+
+
+functions:
+  +schema: udf
+  +enabled: true
+
 
 flags:
   send_anonymous_usage_stats: false

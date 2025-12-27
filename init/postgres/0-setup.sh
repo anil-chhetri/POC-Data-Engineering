@@ -9,7 +9,7 @@ JSON_FILE="/tmp/data.json"
 TARGET_TABLE="all_data"
 
 echo "→ Converting Parquet to JSON via DuckDB..."
-duckdb -c "COPY (SELECT * FROM '${PARQUET_FILE}') TO '${JSON_FILE}' (FORMAT JSON);"
+duckdb -c "COPY (SELECT *, filename as file_name FROM read_parquet('${PARQUET_FILE}', filename=true)) TO '${JSON_FILE}' (FORMAT JSON);"
 
 echo "→ Preparing Postgres schema..."
 psql -v ON_ERROR_STOP=1 \

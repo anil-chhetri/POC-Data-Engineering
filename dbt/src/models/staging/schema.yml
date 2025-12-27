@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: stg_event_details
+    description: "Staging table for event details data"

@@ -2,6 +2,7 @@
   "type": "record",
   "name": "UserEvent",
   "fields": [
+    {"name": "user_id", "type": "string"},
     {
       "name": "device",
       "type": {
